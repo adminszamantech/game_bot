@@ -55,7 +55,7 @@ const submit = () => {
     onError: (errors) => {
       iziToast.error({
         title: 'Error',
-        message: errors.email?.[0] || 'Login failed. Please check your credentials.',
+        message: errors.email,
         position: 'topRight',
       });
     },
