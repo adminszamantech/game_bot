@@ -18,14 +18,16 @@ class AuthController extends Controller
 
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/dashboard')->with('success','Login Successfully');
             }
-            return redirect()->route('login')->with('error','Invalid Credentials');
+            return Inertia::render('Login', [
+                'errors' => ['email' => 'Login failed. Please check your credentials']
+            ]);
         }
         return Auth::check() && Auth::user()->role === 'admin' ? redirect()->route('dashboard') : Inertia::render('Login');
     }
     public function logout(){
         Auth::logout();
-        return redirect()->route('login')->with("message","Logout Successfully");
+        return Inertia::location(route('login'));
     }
 }

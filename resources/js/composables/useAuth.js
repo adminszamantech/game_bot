@@ -1,7 +1,6 @@
 import { computed } from 'vue';
-import { usePage } from '@inertiajs/inertia-vue3';
+import { usePage } from '@inertiajs/vue3';
 
 export function useAuth() {
-  const { props } = usePage();
-  return computed(() => props.auth || null);
+  return computed(() => usePage().props.user || null);
 }
