@@ -1,6 +1,6 @@
 <script setup >
 // import & export
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link} from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 import Footer from './Footer.vue';
 
@@ -15,7 +15,6 @@ const toggleSidebar = () => {
 const toggleMiniSidebar = () => {
   document.getElementById('sidebar')?.classList.toggle('active');
 };
-
 
 </script>
 
