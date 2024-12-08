@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
+use Inertia\Inertia;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-
         if($request->isMethod('post')){
-            $credentials = $request->only('email','password');
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-                return redirect()->route('dashboard')->with('success','Successfully Login');
+                return redirect()->intended('/dashboard');
+
             }
             return redirect()->route('login')->with('error','Invalid Credentials');
         }
@@ -24,6 +27,6 @@ class AuthController extends Controller
     }
     public function logout(){
         Auth::logout();
-        return Inertia::location(route('dashboard'));
+        return redirect()->route('login')->with("message","Logout Successfully");
     }
 }
