@@ -1,5 +1,14 @@
 <script setup >
-    import { Link} from '@inertiajs/inertia-vue3';
+    // import & export
+    import { Link, usePage } from '@inertiajs/vue3';
+
+
+    // variables
+    const user = usePage().props.user;
+
+
+
+    // methods
 </script>
 
 <template>
@@ -13,7 +22,7 @@
         <div class="profile-desc">
             <div class="profile-pic">
             <div class="profile-name">
-                <h5 class="mb-0 font-weight-normal">Saurov Saha</h5>
+                <h5 class="mb-0 font-weight-normal">{{ user.name }}</h5>
             </div>
             </div>
             <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
