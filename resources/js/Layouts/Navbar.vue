@@ -1,9 +1,11 @@
 <script setup >
 // import & export
-import { Link} from '@inertiajs/inertia-vue3';
+import { Link, usePage} from '@inertiajs/vue3';
 import { ref } from 'vue';
 import Footer from './Footer.vue';
+
 const sidebarActive = ref(false);
+const user = usePage().props.user;
 
 const toggleSidebar = () => {
   sidebarActive.value = !sidebarActive.value;
@@ -119,7 +121,7 @@ const toggleMiniSidebar = () => {
               <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                   <div class="navbar-profile">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name"> Admin </p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name"> {{ user.name }} </p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
                 </a>
