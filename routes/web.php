@@ -25,5 +25,6 @@ Route::match(['get','post'],'/forgot-password', [AuthController::class, 'forgot_
 Route::match(['get','post'],'/reset-password', [AuthController::class, 'reset_password'])->name('resetPassword');
 Route::middleware(['admin'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+    Route::match(['get','post'],'/change-password', [AuthController::class, 'change_password'])->name('changePassword');
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
 });

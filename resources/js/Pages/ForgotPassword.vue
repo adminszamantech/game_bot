@@ -12,7 +12,7 @@ const otpSend = () => {
     onSuccess: () => {
       iziToast.success({
         title: 'Success',
-        message: 'OTP Sent to Your Email.',
+        message: 'OTP Sent to Your Email',
         position: 'topRight',
       });
     },

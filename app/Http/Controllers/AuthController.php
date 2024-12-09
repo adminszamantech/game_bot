@@ -56,6 +56,20 @@ class AuthController extends Controller
         }
         return Inertia::render('ResetPassword');
     }
+    public function change_password(Request $request){
+        if($request->isMethod('post')){
+           $user = User::find(Auth::id());
+           if(Hash::check($request->currentPassword, $user->password)){
+                $user->password = Hash::make($request->newPassword);
+                $user->save();
+                return redirect()->route('dashboard');
+           }
+           return Inertia::render('ChangePassword',[
+                'errors' => ['password' => "Try Again! Password Doesn't Match"]
+           ]);
+        }
+        return Inertia::render('ChangePassword');
+    }
     public function logout(){
         Auth::logout();
         return Inertia::location(route('login'));

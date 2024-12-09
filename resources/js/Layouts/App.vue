@@ -1,5 +1,5 @@
 <script setup>
-import { Link, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import Footer from './Footer_admin.vue';
 import Sidebar from './Sidebar_admin.vue';
@@ -24,7 +24,7 @@ const toggleMiniSidebar = () => {
     <Sidebar :user="user"/>
     <div class="container-fluid page-body-wrapper">
 
-      <Navbar :user="user" :toggle-sidebar="toggleSidebar" />
+      <Navbar :user="user" :toggle-sidebar="toggleSidebar" :toggle-mini-sidebar="toggleMiniSidebar" />
         <div class="main-panel">
           <div class="content-wrapper">
             <main>
