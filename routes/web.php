@@ -21,6 +21,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', fn() => redirect()->route(Auth::check() ? 'dashboard' : 'login'));
 Route::match(['get','post'],'/login', [AuthController::class, 'login'])->name('login');
+Route::match(['get','post'],'/forgot-password', [AuthController::class, 'forgot_password'])->name('forgotPassword');
+Route::match(['get','post'],'/reset-password', [AuthController::class, 'reset_password'])->name('resetPassword');
 Route::middleware(['admin'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
