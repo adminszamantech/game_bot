@@ -1,4 +1,5 @@
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
 // Define props
@@ -8,6 +9,10 @@ defineProps({
     required: true
   },
   toggleSidebar: {
+    type: Function,
+    required: true,
+  },
+  toggleMiniSidebar: {
     type: Function,
     required: true,
   },
@@ -168,6 +173,17 @@ defineProps({
                     <p class="preview-subject mb-1">Settings</p>
                   </div>
                 </a>
+                <div class="dropdown-divider"></div>
+                <Link :href="route('changePassword')" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-settings text-success"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject mb-1">Change Password</p>
+                  </div>
+                </Link>
                 <div class="dropdown-divider"></div>
                 <Link :href="route('logout')" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">

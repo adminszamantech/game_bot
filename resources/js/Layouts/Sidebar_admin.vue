@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue';
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
 // Define props
 defineProps({
@@ -21,13 +21,8 @@ defineProps({
         <li class="nav-item profile">
         <div class="profile-desc">
             <div class="profile-pic">
-                <div class="count-indicator">
-                  <img class="img-xs rounded-circle " src="/public/storage/assets/images/faces/face15.jpg" alt="">
-                  <span class="count bg-success"></span>
-                </div>
                 <div class="profile-name">
                     <h5 class="mb-0 font-weight-normal">{{ user.name }}</h5>
-                    <span>Gold Member</span>
                 </div>
             </div>
             <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
@@ -43,7 +38,7 @@ defineProps({
                 </div>
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item preview-item">
+            <Link :href="route('changePassword')" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                     <i class="mdi mdi-onepassword  text-info"></i>
@@ -52,7 +47,7 @@ defineProps({
                 <div class="preview-item-content">
                 <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
                 </div>
-            </a>
+            </Link>
             <div class="dropdown-divider"></div>
             <Link :href="route('logout')" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
