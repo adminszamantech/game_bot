@@ -1,9 +1,10 @@
 <template>
-    <DashboardLayout>
-        <h1 class="text-2xl font-bold">Welcome Dashboard</h1>
-    </DashboardLayout>
+    <App>
+        <AdminDashboard/>
+    </App>
 </template>
 
 <script setup>
-import DashboardLayout from '@/Layouts/DashboardLayout.vue';
+import App from '@/Layouts/App.vue';
+import AdminDashboard from '@/components/AdminDashboard.vue';
 </script>

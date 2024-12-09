@@ -20,7 +20,6 @@
 <body>
     @inertia
 
-
     <script src="{{ asset('/storage/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('/storage/assets/vendors/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('/storage/assets/vendors/progressbar.js/progressbar.min.js') }}"></script>

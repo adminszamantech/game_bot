@@ -7,7 +7,6 @@ import iziToast from 'izitoast';
 
 window.iziToast = iziToast;
 
-
 createInertiaApp({
     resolve: name => import(`./Pages/${name}.vue`),
     setup({ el, App, props, plugin }) {
