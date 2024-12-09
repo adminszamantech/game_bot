@@ -5,22 +5,22 @@ import { Link, router } from '@inertiajs/vue3';
 
 const form = reactive({
   email: '',
-  password: '',
 });
 
-const submit = () => {
-  router.post('/login', form, {
+const otpSend = () => {
+  router.post('/forgot-password', form, {
     onSuccess: () => {
       iziToast.success({
         title: 'Success',
-        message: 'Logged in successfully!',
+        message: 'OTP Sent to Your Email.',
         position: 'topRight',
       });
     },
     onError: (errors) => {
+        console.log(errors);
       iziToast.error({
         title: 'Error',
-        message: errors.email,
+        message: errors.otp,
         position: 'topRight',
       });
     },
@@ -34,23 +34,18 @@ const submit = () => {
         <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
           <div class="card col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
-              <h3 class="card-title text-center mb-3">Admin Login</h3>
-
-              <form @submit.prevent="submit">
+              <h3 class="card-title text-center mb-3">Admin Forgot Password OTP</h3>
+              <form @submit.prevent="otpSend">
                 <div class="form-group">
                   <label>Email *</label>
                   <input type="email" v-model="form.email" class="form-control p_input text-white" placeholder="Enter Email Address" required>
                 </div>
-                <div class="form-group">
-                  <label>Password *</label>
-                  <input type="password" v-model="form.password" class="form-control p_input text-white" placeholder="Enter Password" required>
-                </div>
                 <div class="form-group d-flex align-items-center justify-content-between">
                   <div>
-                    <Link :href="route('forgotPassword')" class="forgot-pass text-danger">Forgot password?</Link>
+                    <Link :href="route('login')" class="forgot-pass text-danger">Goto Login Page?</Link>
                     </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary py-2">Login</button>
+                    <button type="submit" class="btn btn-primary py-2">Send OTP</button>
                     </div>
                 </div>
               </form>

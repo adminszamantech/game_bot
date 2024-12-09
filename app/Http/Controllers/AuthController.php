@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -25,6 +27,34 @@ class AuthController extends Controller
             ]);
         }
         return Auth::check() && Auth::user()->role === 'admin' ? redirect()->route('dashboard') : Inertia::render('Login');
+    }
+    public function forgot_password(Request $request){
+        if($request->isMethod('post')){
+            $user = User::whereEmail($request->email)->first();
+            if($user){
+                $user->otp = random_int(100000, 999999);
+                $user->save();
+                return redirect()->route('resetPassword')->with('success','OTP sent to your email');
+            }
+            return Inertia::render('ForgotPassword', [
+                'errors' => ['otp' => "Try Again! Email Doesn't Match"]
+            ]);
+        }
+        return Inertia::render('ForgotPassword');
+    }
+    public function reset_password(Request $request){
+        if($request->isMethod('post')){
+            $user = User::whereOtp($request->otp)->first();
+            if($user){
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return redirect()->route('login')->with('success','Password Reset Successfully');
+            }
+            return Inertia::render('ResetPassword', [
+                'errors' => ['otp' => "Try Again! Invalid OTP"]
+            ]);
+        }
+        return Inertia::render('ResetPassword');
     }
     public function logout(){
         Auth::logout();
