@@ -64,11 +64,3 @@ const submit = () => {
     </div>
   </div>
 </template>
-
-
-<style scoped>
-.transparent-card {
-  background-color: rgba(255, 255, 255, 0.1); /* Adjust opacity as needed */
-  backdrop-filter: blur(10px); /* Optional: Adds a blur effect for a frosted glass look */
-}
-</style>
