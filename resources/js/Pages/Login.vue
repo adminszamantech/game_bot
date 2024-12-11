@@ -1,3 +1,4 @@
+
 <script setup>
 import { reactive } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
@@ -18,6 +19,7 @@ const submit = () => {
       });
     },
     onError: (errors) => {
+        console.log(errors);
       iziToast.error({
         title: 'Error',
         message: errors.email,
@@ -28,6 +30,7 @@ const submit = () => {
 };
 </script>
 <template>
+
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="row w-100 m-0">
@@ -61,3 +64,11 @@ const submit = () => {
     </div>
   </div>
 </template>
+
+
+<style scoped>
+.transparent-card {
+  background-color: rgba(255, 255, 255, 0.1); /* Adjust opacity as needed */
+  backdrop-filter: blur(10px); /* Optional: Adds a blur effect for a frosted glass look */
+}
+</style>

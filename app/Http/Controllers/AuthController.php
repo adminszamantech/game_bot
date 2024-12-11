@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendForgotPasswordOtpJob;
 
 class AuthController extends Controller
 {
@@ -34,7 +35,11 @@ class AuthController extends Controller
             if($user){
                 $user->otp = random_int(100000, 999999);
                 $user->save();
-                return redirect()->route('resetPassword')->with('success','OTP sent to your email');
+                $email = $user->email;
+                $name = $user->name;
+                $otp = $user->otp;
+                dispatch(new SendForgotPasswordOtpJob($email,$name,$otp));
+                return redirect()->route('resetPassword')->with('success','OTP Sent to Your Email');
             }
             return Inertia::render('ForgotPassword', [
                 'errors' => ['otp' => "Try Again! Email Doesn't Match"]
