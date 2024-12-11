@@ -1,3 +1,4 @@
+
 <script setup>
 import { reactive } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
@@ -18,6 +19,7 @@ const submit = () => {
       });
     },
     onError: (errors) => {
+        console.log(errors);
       iziToast.error({
         title: 'Error',
         message: errors.email,
@@ -28,6 +30,7 @@ const submit = () => {
 };
 </script>
 <template>
+
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="row w-100 m-0">

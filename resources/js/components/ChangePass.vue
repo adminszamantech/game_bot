@@ -45,7 +45,7 @@
         <div class="col-md-6">
             <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Change Password</h4>
+                    <h4 class="card-title text-center">Change Password</h4>
                     <form @submit.prevent="changePassword" class="forms-sample">
                       <div class="form-group">
                         <label for="exampleInputPassword1">Current Password</label>
