@@ -28,7 +28,7 @@ class UserController extends Controller
         ], 422);
     }
     public function user_login(LoginRequest $request){
-            $user = User::wherePhone($request->phone)->first();
+            $user = User::wherePhone($request->phone)->whereIsActive(true)->first();
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
                     'message' => 'Login Faild! Try Again With Valid Credentials',
@@ -39,6 +39,15 @@ class UserController extends Controller
                 'token' => $this->createToken($user),
                 'user' => $user,
             ], 200);
+    }
+    public function auth_check(Request $request){
+        if ($request->user()) {
+            return response()->json([
+                'isValid' => true,
+                'user' => $request->user(),
+            ],200);
+        }
+        return response()->json(['isValid' => false], 401);
     }
     public function createToken($user){
         return $token = $user->createToken('api_token')->plainTextToken;
