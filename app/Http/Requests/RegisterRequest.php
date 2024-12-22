@@ -22,8 +22,9 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required',
             'phone' => 'required|numeric|digits:11|unique:users,phone',
-            'password' => 'required|string|min:4|confirmed',
+            'password' => 'required|min:4',
         ];
     }
 
@@ -35,13 +36,13 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'Name is required.',
             'phone.required' => 'Phone number is required.',
             'phone.numeric' => 'Phone number must be a valid number.',
             'phone.digits' => 'Phone number must be exactly 11 digits.',
             'phone.unique' => 'Phone number already exists.',
             'password.required' => 'Password is required.',
             'password.min' => 'Password must be at least 4 characters.',
-            'password.confirmed' => 'Password confirmation does not match.',
         ];
     }
 }

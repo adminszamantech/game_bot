@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Config;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +22,10 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'otp'
+        'otp',
+        'reffer_code',
+        'role',
+        'is_active'
     ];
 
 
@@ -39,5 +44,24 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+
+    public static function generateReferralCode()
+    {
+        $appName = Config::get('app.name', 'APP');
+        $appInitials = collect(explode(' ', $appName))
+            ->map(fn($word) => strtoupper(substr($word, 0, 1)))
+            ->join('');
+        do {
+            $code = $appInitials . '-' . Str::upper(Str::random(6));
+        } while (self::where('reffer_code', $code)->exists());
+        return $code;
+    }
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            $user->reffer_code = self::generateReferralCode();
+        });
     }
 }

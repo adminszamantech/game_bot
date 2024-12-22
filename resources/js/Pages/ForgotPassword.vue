@@ -17,7 +17,6 @@ const otpSend = () => {
       });
     },
     onError: (errors) => {
-        console.log(errors);
       iziToast.error({
         title: 'Error',
         message: errors.otp,

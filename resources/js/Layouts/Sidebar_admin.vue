@@ -63,8 +63,8 @@ defineProps({
         </div>
         </li>
 
-        <li class="nav-item menu-items">
-            <Link class="nav-link" :href="route('dashboard')">
+        <li class="nav-item menu-items" :class="{ 'active': $page.url.startsWith('/dashboard') }">
+            <Link class="nav-link"  :href="route('dashboard')">
                 <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
                 </span>
@@ -72,18 +72,18 @@ defineProps({
             </Link>
         </li>
 
-        <li class="nav-item menu-items">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-users" aria-expanded="false" aria-controls="ui-users">
+        <li class="nav-item menu-items" :class="{ 'active': $page.url.startsWith('/users') }">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-users"  :aria-expanded="$page.url.startsWith('/users') ? 'true' : 'false'" aria-controls="ui-users">
                 <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
                 </span>
                 <span class="menu-title">Users</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-users">
+            <div class="collapse" :class="{ 'show': $page.url.startsWith('/users') }" id="ui-users">
                 <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Users</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Roles </a></li>
+                <li class="nav-item"> <Link class="nav-link" :class="{ 'active': $page.url.startsWith('/users') }" :href="route('users.index')">Users</Link></li>
+                <li class="nav-item"> <a class="nav-link" :class="{ 'active': $page.url === '/pages/ui-features/dropdowns' }" href="pages/ui-features/dropdowns.html">Roles </a></li>
                 </ul>
             </div>
         </li>

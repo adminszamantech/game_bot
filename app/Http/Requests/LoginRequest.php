@@ -22,8 +22,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => 'required|digits:11',
-            'password' => 'required',
+            'phone' => 'required|numeric|digits:11',
+            'password' => 'required|min:4',
         ];
     }
 
@@ -36,8 +36,10 @@ class LoginRequest extends FormRequest
     {
         return [
             'phone.required' => 'Phone number is required.',
+            'phone.numeric' => 'Phone number must be a valid number.',
             'phone.digits' => 'Phone number must be exactly 11 digits.',
             'password.required' => 'Password is required.',
+            'password.min' => 'Password must be at least 4 characters.',
         ];
     }
 }

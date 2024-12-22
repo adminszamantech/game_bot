@@ -14,7 +14,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-          '@inertiajs/inertia-vue3': '/node_modules/@inertiajs/inertia-vue3'
+          '@inertiajs/inertia-vue3': '/node_modules/@inertiajs/inertia-vue3',
         }
     }
 });

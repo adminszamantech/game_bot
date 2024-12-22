@@ -19,7 +19,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('otp')->nullable();
+            $table->string('reffer_code');
             $table->enum('role',['admin','user'])->default('user');
+            $table->boolean('is_active')->default(true)->comment('1=active,0=inactive');
             $table->rememberToken();
             $table->timestamps();
         });

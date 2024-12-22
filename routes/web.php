@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -23,6 +24,11 @@ Route::match(['get','post'],'/forgot-password', [AuthController::class, 'forgot_
 Route::match(['get','post'],'/reset-password', [AuthController::class, 'reset_password'])->name('resetPassword');
 Route::middleware(['admin'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+    Route::resource('users',UserController::class);
+    Route::get('users-status/{user}', [UserController::class, 'status']);
+
+
+
     Route::match(['get','post'],'/change-password', [AuthController::class, 'change_password'])->name('changePassword');
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
 });
